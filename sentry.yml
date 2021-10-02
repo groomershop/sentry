@@ -334,13 +334,11 @@ services:
         - traefik.http.routers.sentry-https.entrypoints=https
         - traefik.http.routers.sentry-https.tls=true
         - traefik.http.routers.sentry-https.tls.certresolver=le
-        - traefik.http.services.sentry.loadbalancer.server.port=9000
+        - traefik.http.services.sentry.loadbalancer.server.port=80
     <<: *restart_policy
     networks:
       - net
       - traefik-public
-    ports:
-      - "9000:80/tcp"
     image: "nginx:1.21.0-alpine"
     volumes:
       - type: bind
