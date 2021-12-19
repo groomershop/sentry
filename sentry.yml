@@ -18,7 +18,7 @@ x-healthcheck-defaults: &healthcheck_defaults
   # Related issues:
   # https://github.com/moby/moby/issues/39102
   # https://github.com/moby/moby/issues/39388
-  # https://github.com/getsentry/onpremise/issues/1000
+  # https://github.com/getsentry/self-hosted/issues/1000
   interval: 30s
   timeout: 5s
   retries: 5
@@ -195,6 +195,9 @@ services:
       ["/usr/bin/geoipupdate", "-d", "/sentry", "-f", "/sentry/GeoIP.conf"]
     volumes:
       - "./geoip:/sentry"
+    deploy:
+      restart_policy:
+        condition: on-failure
   snuba-api:
     <<: *deploy_constraints
     <<: *snuba_defaults
@@ -235,7 +238,7 @@ services:
   snuba-cleanup:
     <<: *deploy_constraints
     <<: *snuba_defaults
-    image: snuba-cleanup-onpremise-local
+    image: snuba-cleanup-self-hosted-local
     build:
       context: ./cron
       args:
@@ -244,7 +247,7 @@ services:
   snuba-transactions-cleanup:
     <<: *deploy_constraints
     <<: *snuba_defaults
-    image: snuba-cleanup-onpremise-local
+    image: snuba-cleanup-self-hosted-local
     build:
       context: ./cron
       args:
@@ -264,7 +267,7 @@ services:
   symbolicator-cleanup:
     <<: *deploy_constraints
     <<: *restart_policy
-    image: symbolicator-cleanup-onpremise-local
+    image: symbolicator-cleanup-self-hosted-local
     build:
       context: ./cron
       args:
@@ -311,7 +314,7 @@ services:
   sentry-cleanup:
     <<: *deploy_constraints
     <<: *sentry_defaults
-    image: sentry-cleanup-onpremise-local
+    image: sentry-cleanup-self-hosted-local
     build:
       context: ./cron
       args:
@@ -339,7 +342,7 @@ services:
     networks:
       - net
       - traefik-public
-    image: "nginx:1.21.0-alpine"
+    image: "nginx:1.21.4-alpine"
     volumes:
       - type: bind
         read_only: true
