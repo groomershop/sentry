@@ -1,5 +1,46 @@
 # Changelog
 
+## 22.3.0
+
+### Various fixes & improvements
+
+- Run CI every night (#1334) by @aminvakil
+- Docker-Compose: Avoid setting hostname to '' (#1365) by @glensc
+- meta(gha): Deploy workflow enforce-license-compliance.yml (#1375) by @chadwhitacre
+- ci: Change stale GitHub workflow to run once a day (#1371) by @kamilogorek
+- ci: Temporary fix for interactive prompt on createuser (#1370) by @BYK
+- meta(gha): Deploy workflow enforce-license-compliance.yml (#1347) by @chadwhitacre
+- Add SaaS nudge to README (#1327) by @chadwhitacre
+
+## 22.2.0
+
+### Various fixes & improvements
+
+- fix: unbound variable _group in reset/dc-detect-version script (#1283) (#1284) by @lovetodream
+- Remove routing helper (#1323) by @chadwhitacre
+- Bump nginx:1.21.6-alpine (#1319) by @aminvakil
+- Add a cloudbuild.yaml for GCB (#1315) by @chadwhitacre
+- Update set-up-and-migrate-database.sh (#1308) by @drmrbrewer
+- Pull relay explicitly to avoid garbage in creds (#1301) by @chadwhitacre
+- Improve logging of docker versions and relay creds (#1298) by @chadwhitacre
+- Remove file again (#1299) by @chadwhitacre
+- Clean up relay credentials generation (#1289) by @chadwhitacre
+- Add CI compose version 1.29.2 / 2.0.1 / 2.2.3 (#1290) by @chadwhitacre
+- Revert "Add CI compose version 1.29.2 / 2.0.1 / 2.2.3 (#1251)" (#1272) by @chadwhitacre
+- Add CI compose version 1.29.2 / 2.0.1 / 2.2.3 (#1251) by @aminvakil
+
+## 22.1.0
+
+### Various fixes & improvements
+
+- Make healthcheck variables configurable in .env (#1248) by @aminvakil
+- Take some actions to avoid unhealthy containers (#1241) by @chadwhitacre
+- Install: setup umask (#1222) by @glensc
+- Deprecated /docker-entrypoint.sh call (#1218) by @marcinroman
+- Bump nginx:1.21.5-alpine (#1230) by @aminvakil
+- Fix reset.sh docker-compose call (#1215) by @aminvakil
+- Set worker_processes to auto (#1207) by @aminvakil
+
 ## 21.12.0
 
 ### Support Docker Compose v2 (ongoing)
