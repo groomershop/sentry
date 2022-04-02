@@ -19,13 +19,13 @@ x-healthcheck-defaults: &healthcheck_defaults
   # https://github.com/moby/moby/issues/39102
   # https://github.com/moby/moby/issues/39388
   # https://github.com/getsentry/self-hosted/issues/1000
-  interval: "$HEALTHCHECK_INTERVAL"
-  timeout: "$HEALTHCHECK_TIMEOUT"
-  retries: "$HEALTHCHECK_RETRIES"
+  interval: 30s
+  timeout: 60s
+  retries: 5
   start_period: 10s
 x-sentry-defaults: &sentry_defaults
   <<: *restart_policy
-  image: "$SENTRY_IMAGE"
+  image: "getsentry/sentry:nightly"
   entrypoint: "/etc/sentry/entrypoint.sh"
   command: ["run", "web"]
   environment:
@@ -42,8 +42,8 @@ x-sentry-defaults: &sentry_defaults
     GRPC_DEFAULT_SSL_ROOTS_FILE_PATH_ENV_VAR: *ca_bundle
     # Leaving the value empty to just pass whatever is set
     # on the host system (or in the .env file)
-    SENTRY_EVENT_RETENTION_DAYS:
-    SENTRY_MAIL_HOST:
+    SENTRY_EVENT_RETENTION_DAYS: 90
+    SENTRY_MAIL_HOST: groomershop.pl
   volumes:
     - "sentry-data:/data"
     - "./sentry:/etc/sentry"
@@ -51,7 +51,7 @@ x-sentry-defaults: &sentry_defaults
     - "./certificates:/usr/local/share/ca-certificates:ro"
 x-snuba-defaults: &snuba_defaults
   <<: *restart_policy
-  image: "$SNUBA_IMAGE"
+  image: "getsentry/snuba:nightly"
   environment:
     SNUBA_SETTINGS: docker
     CLICKHOUSE_HOST: clickhouse
@@ -61,7 +61,7 @@ x-snuba-defaults: &snuba_defaults
     UWSGI_DISABLE_LOGGING: "true"
     # Leaving the value empty to just pass whatever is set
     # on the host system (or in the .env file)
-    SENTRY_EVENT_RETENTION_DAYS:
+    SENTRY_EVENT_RETENTION_DAYS: 90
 services:
   smtp:
     <<: *restart_policy
@@ -246,7 +246,7 @@ services:
     build:
       context: ./cron
       args:
-        BASE_IMAGE: "$SNUBA_IMAGE"
+        BASE_IMAGE: "getsentry/snuba:nightly"
     command: '"*/5 * * * * gosu snuba snuba cleanup --storage errors --dry-run False"'
   snuba-transactions-cleanup:
     <<: *deploy_constraints
@@ -255,12 +255,12 @@ services:
     build:
       context: ./cron
       args:
-        BASE_IMAGE: "$SNUBA_IMAGE"
+        BASE_IMAGE: "getsentry/snuba:nightly"
     command: '"*/5 * * * * gosu snuba snuba cleanup --storage transactions --dry-run False"'
   symbolicator:
     <<: *deploy_constraints
     <<: *restart_policy
-    image: "$SYMBOLICATOR_IMAGE"
+    image: "getsentry/symbolicator:nightly"
     volumes:
       - "sentry-symbolicator:/data"
       - type: bind
@@ -275,7 +275,7 @@ services:
     build:
       context: ./cron
       args:
-        BASE_IMAGE: "$SYMBOLICATOR_IMAGE"
+        BASE_IMAGE: "getsentry/symbolicator:nightly"
     command: '"55 23 * * * gosu symbolicator symbolicator cleanup"'
     volumes:
       - "sentry-symbolicator:/data"
@@ -322,9 +322,9 @@ services:
     build:
       context: ./cron
       args:
-        BASE_IMAGE: "$SENTRY_IMAGE"
+        BASE_IMAGE: "getsentry/sentry:nightly"
     entrypoint: "/entrypoint.sh"
-    command: '"0 0 * * * gosu sentry sentry cleanup --days $SENTRY_EVENT_RETENTION_DAYS"'
+    command: '"0 0 * * * gosu sentry sentry cleanup --days 90"'
   nginx:
     deploy:
       placement:
@@ -355,7 +355,7 @@ services:
   relay:
     <<: *deploy_constraints
     <<: *restart_policy
-    image: "$RELAY_IMAGE"
+    image: "getsentry/relay:nightly"
     volumes:
       - type: bind
         read_only: true
