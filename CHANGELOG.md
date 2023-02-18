@@ -1,5 +1,137 @@
 # Changelog
 
+## 23.2.0
+
+### Various fixes & improvements
+
+- Run lock issues/PRs only on getsentry (#1966) by @aminvakil
+- Updates Redis to 6.2.10 (#1937) by @danielhartnell
+- Handle missing example files gracefully (#1950) by @chadwhitacre
+- Fix post-release.sh for `git pull` (#1938) by @BYK
+- Manually change 23.1.1 to nightly (#1936) by @hubertdeng123
+
+## 23.1.1
+
+### Various fixes & improvements
+
+- ci: Add test for symbolicator pipeline (#1916) by @ethanhs
+
+## 23.1.0
+
+### Various fixes & improvements
+
+- ci: Check health of services after running integration tests and fix snuba-replacer (#1897) by @ethanhs
+- Add wal2json debugging (#1906) by @chadwhitacre
+- Pick up CI bugfix (#1905) by @chadwhitacre
+- ref: Move jq build to error-handling.sh, and use proxy config (#1895) by @ethanhs
+- fix(CI): use default curl retry mechanism for wal2json install (#1890) by @volokluev
+- ref: Retry wal2json download in installer (#1881) by @ethanhs
+- ci: Remove GCB and update Github Action SHA (#1880) by @ethanhs
+
+## 22.12.0
+
+### Various fixes & improvements
+
+- Build each service image individually (#1858) by @ethanhs
+- Set higher kafka healthcheck timeout and fix clickhouse timeout (#1855) by @ethanhs
+- Add --skip-sse42-requirements to install.sh and enable SKIP_SSE42_REQUIREMENTS override (#1790) by @erinaceous
+- Fix commit-log-topic parameter configuration problem (#1817) by @klboke
+- Add .idea to .gitignore (#1803) by @spawnia
+- Add USE_X_FORWARDED_HOST to example config (#1804) by @crinjes
+- (fix): Fix contributor PR e2e tests (#1820) by @hubertdeng123
+
+## 22.11.0
+
+### Various fixes & improvements
+
+- Fix jq usage (#1814) by @ethanhs
+- Try adding end to end tests using new action (#1806) by @ethanhs
+- Add context line, error msg to envelope (#1784) by @hubertdeng123
+- Update to actions/checkoutv3 to address upcoming github deprecations (#1792) by @mattgauntseo-sentry
+- ref: upgrade actions/setup-python to avoid set-output deprecation (#1789) by @asottile-sentry
+- Enforce error reporting (#1777) by @hubertdeng123
+- Upload end of log as breadcrumbs, use exceptions and stacktrace (#1775) by @ethanhs
+- Fix sentry release for dogfood instance (#1768) by @hubertdeng123
+- Add pre-commit config (#1738) by @ethanhs
+- Do not send event on INT signal (#1773) by @hubertdeng123
+
+## 22.10.0
+
+### Various fixes & improvements
+
+- Split post process forwarders (#1759) by @chadwhitacre
+- Revert "Enforce error reporting for self-hosted" (#1755) by @hubertdeng123
+- Enforce error reporting for self-hosted (#1753) by @hubertdeng123
+- ref: Remove unused scripts and code (#1710) by @BYK
+- Check to see if docker compose exists, else error out (#1733) by @hubertdeng123
+- Fix minimum version requirements for docker and docker compose (#1732) by @hubertdeng123
+- Factor out clean and use it in unit-test (#1731) by @chadwhitacre
+- Reorganize unit test layout (#1729) by @hubertdeng123
+- Request event ID in issue template (#1723) by @ethanhs
+- Tag releases with sentry-cli (#1718) by @hubertdeng123
+- Send full logs as an attachment to our dogfood instance (#1715) by @hubertdeng123
+
+## 22.9.0
+
+### Various fixes & improvements
+
+- Fix traceback hash for error monitoring (#1700) by @hubertdeng123
+- Add section about error monitoring to the README (#1699) by @ethanhs
+- Switch from .reporterrors file to flag + envvar (#1697) by @chadwhitacre
+- Rename flag to --skip-user-creation (#1696) by @chadwhitacre
+- Default to not sending data to Sentry for now (#1695) by @chadwhitacre
+- fix(e2e tests): Pull branch that initially triggers gcp build for PRs (#1694) by @hubertdeng123
+- fix(e2e tests): Add .reporterrors file for GCP run of e2e tests (#1691) by @hubertdeng123
+- Error monitoring of the self-hosted installer (#1679) by @ethanhs
+- added docker commands in the description (#1673) by @victorelec14
+- Use docker-compose 2.7.0 instead of 2.2.3 in CI (#1591) by @aminvakil
+
+## 22.8.0
+
+- No documented changes.
+
+## 22.7.0
+
+### Various fixes & improvements
+
+- ref: use sort -V to check minimum versions (#1553) by @ethanhs
+- Get more data from users in issue templates (#1497) by @aminvakil
+- Add ARM support (#1538) by @chadwhitacre
+- do not use gosu for snuba-transactions-cleanup and snuba-cleanup (#1564) by @goganchic
+- ref: Replace regex with --short flag to get compose version (#1551) by @ethanhs
+- Improve installation through proxy (#1543) by @goganchic
+- Cleanup .env{,.custom} handling (#1539) by @chadwhitacre
+- Bump nginx:1.22.0-alpine (#1506) by @aminvakil
+- Run release a new version job only on getsentry (#1529) by @aminvakil
+
+## 22.6.0
+
+### Various fixes & improvements
+
+- fix "services.web.healthcheck.retries must be a number" (#1482) by @yuval1986
+- Add volume for nginx cache (#1511) by @glensc
+- snuba: New subscriptions infrastucture rollout (#1507) by @lynnagara
+- Ease modification of base image (#1479) by @spawnia
+
+## 22.5.0
+
+### Various fixes & improvements
+
+- ref: reset user to root for installation (#1469) by @asottile-sentry
+- Document From email display name (#1446) by @chadwhitacre
+- Bring in CLA Lite (#1439) by @chadwhitacre
+- fix: replace git.io links with redirect targets (#1430) by @asottile-sentry
+
+## 22.4.0
+
+### Various fixes & improvements
+
+- Use better API key when available (#1408) by @chadwhitacre
+- Use a custom action (#1407) by @chadwhitacre
+- Add some debug logging (#1340) by @chadwhitacre
+- meta(gha): Deploy workflow enforce-license-compliance.yml (#1388) by @chadwhitacre
+- Turn off containers under old name as well (#1384) by @chadwhitacre
+
 ## 22.3.0
 
 ### Various fixes & improvements

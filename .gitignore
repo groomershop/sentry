@@ -1,3 +1,6 @@
+# Error reporting choice cache
+.reporterrors
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -74,12 +77,16 @@ docker-compose.override.yml
 
 *.tar
 data/
+
+# Editor / IDE
 .vscode/tags
+.idea
 
 # custom Sentry config
 sentry/sentry.conf.py
 sentry/config.yml
 sentry/*.bak
+sentry/enhance-image.sh
 sentry/requirements.txt
 relay/credentials.json
 relay/config.yml
